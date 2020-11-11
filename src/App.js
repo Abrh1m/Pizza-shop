@@ -5,13 +5,15 @@ import Home from './components/Home';
 import PizzaTypes from './components/PizzaTypes';
 import Toppings from './components/Toppings';
 import Order from './components/Order';
+import Popup  from './components/Popup'
 import { AnimatePresence} from 'framer-motion'
 
 function App() {
 
   const location = useLocation();
 
-  const [pizza, setPizza] = useState({type: "", toppings: [] });
+  const [pizza, setPizza] = useState({type: "", toppings: [] }); 
+  const [showPopup, setPopup] = useState(false);
 
   const addType = (type) => {
     setPizza({ ...pizza, type })
@@ -30,7 +32,8 @@ function App() {
   return (
     <>
      <Header /> 
-     <AnimatePresence exitBeforeEnter>     
+     <Popup showPopup={showPopup} setPopup={setPopup} />
+     <AnimatePresence exitBeforeEnter onExitComplete={() => setPopup(false)}>     
        <Switch location={location} key={location.key}>  
           <Route path="/pizzatype">
             <PizzaTypes addType={addType} pizza={pizza} />
@@ -39,7 +42,7 @@ function App() {
             <Toppings addTopping={addTopping} pizza={pizza} />
           </Route>
           <Route path="/order">
-            <Order addTopping={addTopping} pizza={pizza}/>
+            <Order setPopup={setPopup} pizza={pizza}/>
           </Route>      
           <Route path="/">
             <Home />

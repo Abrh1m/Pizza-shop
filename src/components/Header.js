@@ -18,9 +18,9 @@ const Header = () => {
                </svg>
            </div>
            <motion.div className="title"
-           initial={{y: -250}}
-           animate={{y: -15}}
-           transition={{delay: 0.3, type: "spring", stiffness: 60}}
+           initial={{x: "250vw"}}
+           animate={{x: 0}}
+           transition={{delay: 0.3, type: "spring", stiffness: 30}}
            >
               <Link to="/"> 
                <motion.h1

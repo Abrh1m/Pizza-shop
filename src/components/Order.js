@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {motion, Variants} from 'framer-motion'
 
 const list = {
@@ -33,9 +33,13 @@ const childList = {
   }
 }
 
-const Order = ({  pizza }) => {
+const Order = ({ setPopup, pizza }) => {
 
-
+  useEffect(() => {
+    setTimeout(() => {
+      setPopup(true)
+    }, 5000)
+  }, [setPopup])
 
   const orderList = pizza.type ? (
     <div>
