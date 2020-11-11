@@ -1,36 +1,79 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { motion, Variants} from 'framer-motion';
 
+const pizzaList = {
+  init: {
+    opacity: 0,
+    x: '-100vw'
+  },
+  focus: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: 'spring', 
+      stiffness: '40',
+      delay: 0.3
+    }
+  }
+}
 
-const PizzaTypes = ({addType, pizza}) => {
-    const pizzaTypes = [Pepperoni, Mexican, Margharita, Spanish]
+const nextButton = {
+  init: {
+    x: '100vw'
+  }, 
+  focus: {
+    x: 0,
+    transition: {
+      type: 'spring', 
+      stiffness: 40
+    }
+  }
+}
 
-    return (
-        <div className="base-page">
-            <h2>Choose your pizza</h2>
-            <ul>
-                {pizzaTypes.map(pizzaType => {
-                    let spanClass = pizza.pizzaType === pizzaType ? 'active' : '';
-                    return(
-                        <li key={pizzaType} onClick={() => addType(pizzaType)}>
-                            <span className="spanClass">{pizzaType}</span>
-                        </li>
+const PizzaTypes = ({ addType, pizza }) => {
+  const types = ['Pepperoni', 'Mexican', 'Margharita', 'Spanish', 'Mediterranean'];
 
-                    )
-                })}
-            </ul>
+  return (
+    <motion.div className="base container"
+    variants={pizzaList}
+    initial="init"
+    animate="focus"
 
-            {pizza.pizzaType && (
-                <div>
-                    <Link to="/toppoings">
-                        <button>
-                            Next
-                        </button>
-                    </Link>
-                </div>
-            )}
-        </div>
-    )
+    >
+
+      <motion.h3 >Step 1: Choose Your Pizza</motion.h3>
+      <ul>
+        {types.map(type => { 
+          let spanClass = pizza.type === type ? 'active' : '';
+          return (
+            <motion.li 
+            whileHover={{scale:1.3, originX:0, color: "yellow"}}
+            transition={{ type: 'spring', stiffness: '150'}}
+            key={type} onClick={() => addType(type)}>
+              <span className={spanClass}>{ type }</span>
+            </motion.li>
+          )
+        })}
+      </ul>
+
+      {pizza.type && (
+        <motion.div className="next"
+        variants={nextButton}
+        initial="init"
+        animate="focus"
+        
+        >
+          <Link to="/toppings">
+            <motion.button
+             whileHover={{scale: 1.03, boxShadow: "0px 0px 8px rgb(255,255,255)", color: "yellow", fontWeight: "bold"}}
+            >Next</motion.button>
+          </Link>
+        </motion.div>
+      )}
+
+    </motion.div>
+  )
 }
 
 export default PizzaTypes;
