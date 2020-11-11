@@ -1,12 +1,45 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
+
+const list = {
+  init: {
+    opacity: 0,
+    x: '100vw'
+  },
+  focus: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: 'spring', 
+      stiffness: '40',
+      delay: 0.3
+    }
+  }
+}
+
+const button = {
+  init: {
+    opacity: 0
+  }, 
+  focus: {
+    opacity: 1,
+    transition: {
+      delay: 3
+    }
+  }
+}
 
 const Toppings = ({ addTopping, pizza }) => {
   let toppings = ['jalapenos', 'mushrooms', 'extra meat', 'onions', 'olives', 'extra cheese'];
 
   return (
-    <div className="toppings container">
+    <motion.div className="toppings container"
+    variants={list}
+    initial="init"
+    animate="focus"
+
+    >
       
       <motion.h3>Step 2: Choose Extras</motion.h3> 
       <ul>
@@ -24,11 +57,7 @@ const Toppings = ({ addTopping, pizza }) => {
         })}
       </ul>
 
-      <motion.div
-      initial={{opacity: 0}}
-      animate={{opacity: 1}}
-      transition={{ delay: 2}}
-      >
+      <motion.div variants={button}>
 
       
       <Link to="/order">
@@ -41,7 +70,7 @@ const Toppings = ({ addTopping, pizza }) => {
       </Link>
 
       </motion.div>       
-      </div>
+      </motion.div>
   )
 }
 

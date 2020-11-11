@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion, Variants} from 'framer-motion';
 
-const pizzaList = {
+const list = {
   init: {
     opacity: 0,
     x: '-100vw'
@@ -18,7 +18,7 @@ const pizzaList = {
   }
 }
 
-const nextButton = {
+const button = {
   init: {
     x: '100vw'
   }, 
@@ -36,7 +36,7 @@ const PizzaTypes = ({ addType, pizza }) => {
 
   return (
     <motion.div className="base container"
-    variants={pizzaList}
+    variants={list}
     initial="init"
     animate="focus"
 
@@ -58,12 +58,7 @@ const PizzaTypes = ({ addType, pizza }) => {
       </ul>
 
       {pizza.type && (
-        <motion.div className="next"
-        variants={nextButton}
-        initial="init"
-        animate="focus"
-        
-        >
+        <motion.div className="next" variants={button}>
           <Link to="/toppings">
             <motion.button
              whileHover={{scale: 1.03, boxShadow: "0px 0px 8px rgb(255,255,255)", color: "yellow", fontWeight: "bold"}}

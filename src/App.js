@@ -34,7 +34,7 @@ function App() {
          <Toppings addTopping={addTopping} pizza={pizza} />
        </Route>
        <Route path="/order">
-         <Order pizza={pizza}/>
+         <Order addTopping={addTopping} pizza={pizza}/>
        </Route>      
        <Route path="/">
          <Home />
